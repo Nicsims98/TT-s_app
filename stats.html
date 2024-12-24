@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TT's Statpage - Personal Stats</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Welcome to TT's Statpage!</h1>
+        <h2>Your Personal Softball Stats</h2>
+        
+        <div id="stats" class="mt-4">
+            <h3>Your Stats Overview</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Game Date</th>
+                        <th>Opponent</th>
+                        <th>Runs</th>
+                        <th>Hits</th>
+                        <th>Errors</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in stats %}
+                    <tr>
+                        <td>{{ stat.game_date }}</td>
+                        <td>{{ stat.opponent }}</td>
+                        <td>{{ stat.runs }}</td>
+                        <td>{{ stat.hits }}</td>
+                        <td>{{ stat.errors }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4">
+            <h3>Add New Stat</h3>
+            <form method="POST" action="{% url 'add_stat' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="game_date">Game Date</label>
+                    <input type="date" class="form-control" id="game_date" name="game_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="opponent">Opponent</label>
+                    <input type="text" class="form-control" id="opponent" name="opponent" required>
+                </div>
+                <div class="form-group">
+                    <label for="runs">Runs</label>
+                    <input type="number" class="form-control" id="runs" name="runs" required>
+                </div>
+                <div class="form-group">
+                    <label for="hits">Hits</label>
+                    <input type="number" class="form-control" id="hits" name="hits" required>
+                </div>
+                <div class="form-group">
+                    <label for="errors">Errors</label>
+                    <input type="number" class="form-control" id="errors" name="errors" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Stat</button>
+            </form>
+        </div>
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
