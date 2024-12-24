@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Updates - TT's Statpage</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Live Updates for Your Favorite Teams</h1>
+        <div id="team-updates" class="mt-4">
+            <!-- Live updates will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        // Fetch live updates for the Cincinnati Bengals, Cincinnati Reds, and Michigan Spartans
+        async function fetchTeamUpdates() {
+            const response = await fetch('/api/team-updates/');
+            const data = await response.json();
+            const updatesContainer = document.getElementById('team-updates');
+
+            data.forEach(update => {
+                const updateElement = document.createElement('div');
+                updateElement.classList.add('alert', 'alert-info', 'mt-2');
+                updateElement.textContent = update.message; // Assuming the update has a 'message' field
+                updatesContainer.appendChild(updateElement);
+            });
+        }
+
+        // Call the function to fetch updates when the page loads
+        window.onload = fetchTeamUpdates;
+    </script>
+</body>
+</html>
