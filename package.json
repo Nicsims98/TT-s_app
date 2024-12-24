@@ -1,0 +1,23 @@
+{
+  "name": "TTs-Statpage",
+  "version": "1.0.0",
+  "description": "A personal sports stats page for TT, featuring live updates and reminders.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "bootstrap": "^5.1.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  },
+  "homepage": ".",
+  "license": "MIT"
+}
