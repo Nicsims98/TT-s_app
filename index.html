@@ -4,12 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TT's Statpage</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'sports/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'sports/style.css' %}">
 </head>
 <body>
-    <div id="root"></div>
-    <script src="js/main.js"></script>
+    <div class="container">
+        <header class="text-center my-4">
+            <h1>Welcome to TT's Statpage!</h1>
+            <p>Your personal hub for sports updates and reminders.</p>
+        </header>
+        
+        <nav class="nav justify-content-center mb-4">
+            <a class="nav-link" href="{% url 'team_updates' %}">Team Updates</a>
+            <a class="nav-link" href="{% url 'reminders' %}">Reminders</a>
+            <a class="nav-link" href="{% url 'softball_games' %}">Softball Games</a>
+            <a class="nav-link" href="{% url 'stats' %}">Stats</a>
+        </nav>
+
+        <main>
+            <h2>Live Sports Updates</h2>
+            <p>Stay tuned for the latest updates on your favorite teams!</p>
+            <div id="live-updates" class="alert alert-info">
+                <!-- Live updates will be displayed here -->
+            </div>
+        </main>
+
+        <footer class="text-center mt-4">
+            <p>&copy; 2023 TT's Statpage. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="{% static 'sports/main.js' %}"></script>
 </body>
 </html>
-
-# front end
