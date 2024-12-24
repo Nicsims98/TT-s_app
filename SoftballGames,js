@@ -1,0 +1,88 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const SoftballGames = () => {
+    const [games, setGames] = useState([]);
+    const [newGame, setNewGame] = useState({ date: '', location: '', opponent: '' });
+
+    useEffect(() => {
+        fetchGames();
+    }, []);
+
+    const fetchGames = async () => {
+        try {
+            const response = await axios.get('/api/softball-games/'); // Adjust the endpoint as needed
+            setGames(response.data);
+        } catch (error) {
+            console.error('Error fetching games:', error);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewGame({ ...newGame, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post('/api/softball-games/', newGame); // Adjust the endpoint as needed
+            fetchGames();
+            setNewGame({ date: '', location: '', opponent: '' });
+        } catch (error) {
+            console.error('Error adding game:', error);
+        }
+    };
+
+    return (
+        <div className="container">
+            <h2>My Softball Games</h2>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label>Date</label>
+                    <input
+                        type="date"
+                        className="form-control"
+                        name="date"
+                        value={newGame.date}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Location</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="location"
+                        value={newGame.location}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Opponent</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="opponent"
+                        value={newGame.opponent}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+                <button type="submit" className="btn btn-primary">Add Game</button>
+            </form>
+            <h3>Upcoming Games</h3>
+            <ul className="list-group">
+                {games.map((game, index) => (
+                    <li key={index} className="list-group-item">
+                        {game.date} - {game.location} vs {game.opponent}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
+export default SoftballGames;
