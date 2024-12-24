@@ -1,0 +1,52 @@
+{% extends "hello/layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="title">Welcome to your personal Sports App TT I hope you enjoy this gift of love from your favorite niece!</h2>
+        <p class="description">Stay updated with the latest news and updates for your favorite teams.</p>
+        <div id="easter-egg" class="hidden-egg">Surprise!</div>
+    </div>
+    <div id="react-root"></div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('easter-egg').style.display = 'block';
+            }, Math.random() * 10000); // Random time between 0 and 10 seconds
+        });
+    </script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const App = () => (
+            <div className="alert alert-info" role="alert">
+                This is a React component inside a Django template!
+            </div>
+        );
+
+        ReactDOM.render(<App />, document.getElementById('react-root'));
+    </script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/team_updates.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reminders.css' %}">
+    <link rel="stylesheet" href="{% static 'css/softball_games.css' %}">
+    <link rel="stylesheet" href="{% static 'css/message.css' %}">
+
+    <style>
+        .hidden-egg {
+            display: none;
+        }
+    </style>
+{% endblock %}
